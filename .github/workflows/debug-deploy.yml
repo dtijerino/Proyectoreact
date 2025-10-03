@@ -1,0 +1,38 @@
+name: Debug Deploy
+on:
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: List files
+        run: |
+          echo "=== Root directory ==="
+          ls -la
+          echo "=== Pokemon golden cards directory ==="
+          ls -la pokemon-golden-cards/
+          echo "=== Package.json exists? ==="
+          cat pokemon-golden-cards/package.json
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        working-directory: ./pokemon-golden-cards
+        run: |
+          echo "Installing dependencies..."
+          npm ci
+          
+      - name: Build
+        working-directory: ./pokemon-golden-cards
+        run: |
+          echo "Building project..."
+          npm run build
+          echo "Build completed. Contents of dist:"
+          ls -la dist/
