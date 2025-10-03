@@ -1,0 +1,295 @@
+/* SearchBar Styles */
+.search-bar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-input-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.search-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.search-button {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #ff6b6b, #feca57);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  min-width: 60px;
+}
+
+.search-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.search-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Controls container (alias for legacy .search-actions) */
+.search-controls, .search-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+/* Generic action button */
+.action-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.action-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-button.active {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.random-button {
+  background: linear-gradient(45deg, #48cae4, #023e8a);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+.filter-toggle {
+  background: linear-gradient(45deg, #f72585, #7209b7);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+.clear-button {
+  background: linear-gradient(45deg, #e63946, #a4161a);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+/* Type Filter Styles - align names used in JSX */
+.type-filter, .type-filter-container {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.type-filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.type-filter-header h3 {
+  color: white;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.close-filter {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.close-filter:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.type-grid, .type-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.type-button, .type-filter-button {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.type-button:hover:not(:disabled), .type-filter-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.type-button.selected, .type-filter-button.selected {
+  border-color: white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.type-button:disabled, .type-filter-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Pokemon Type Colors */
+.type-normal { background: linear-gradient(45deg, #A8A878, #C0C0AA); }
+.type-fire { background: linear-gradient(45deg, #F08030, #FF9055); }
+.type-water { background: linear-gradient(45deg, #6890F0, #85A8FF); }
+.type-electric { background: linear-gradient(45deg, #F8D030, #FFE155); }
+.type-grass { background: linear-gradient(45deg, #78C850, #90DD65); }
+.type-ice { background: linear-gradient(45deg, #98D8D8, #B3E5E5); }
+.type-fighting { background: linear-gradient(45deg, #C03028, #D4453D); }
+.type-poison { background: linear-gradient(45deg, #A040A0, #B55BB5); }
+.type-ground { background: linear-gradient(45deg, #E0C068, #EDD583); }
+.type-flying { background: linear-gradient(45deg, #A890F0, #BBA5FF); }
+.type-psychic { background: linear-gradient(45deg, #F85888, #FF73A3); }
+.type-bug { background: linear-gradient(45deg, #A8B820, #BDD135); }
+.type-rock { background: linear-gradient(45deg, #B8A038, #D1C34D); }
+.type-ghost { background: linear-gradient(45deg, #705898, #8573AD); }
+.type-dragon { background: linear-gradient(45deg, #7038F8, #854DFF); }
+.type-dark { background: linear-gradient(45deg, #705848, #8B735D); }
+.type-steel { background: linear-gradient(45deg, #B8B8D0, #CDCDE5); }
+.type-fairy { background: linear-gradient(45deg, #EE99AC, #F4B4C1); }
+
+/* Selected type display aliases */
+.selected-types, .selected-type-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.selected-type, .selected-type-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: default;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.selected-type-label {
+  color: #fff;
+  opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-bar {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-controls, .search-actions {
+    justify-content: flex-start;
+  }
+
+  .type-grid, .type-filter-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 0.4rem;
+  }
+
+  .type-button, .type-filter-button {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .action-button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input-container {
+    flex-direction: column;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .type-grid, .type-filter-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .selected-types, .selected-type-display {
+    font-size: 0.8rem;
+  }
+}
