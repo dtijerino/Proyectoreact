@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "pokemon-golden-cards/dist",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
