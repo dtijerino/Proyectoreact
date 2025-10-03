@@ -57,8 +57,20 @@ function App() {
         setPokemons([pokemon]);
       }
     } catch (err) {
-      setError(err.message);
-      setPokemons([]);
+      // Error handling más específico
+      let errorMessage = 'Error desconocido';
+      if (err.name === 'TypeError') {
+        errorMessage = 'Error de conexión. Verifica tu internet.';
+      } else if (err.message.includes('404') || err.message.includes('no encontrado')) {
+        errorMessage = `Pokémon "${query}" no encontrado. Intenta con otro nombre.`;
+      } else if (err.message.includes('429')) {
+        errorMessage = 'Demasiadas búsquedas. Espera un momento e intenta de nuevo.';
+      } else {
+        errorMessage = err.message || 'Error cargando Pokémon';
+      }
+      
+      setError(errorMessage);
+      if (!append) setPokemons([]);
     } finally {
       setLoading(false);
     }
@@ -104,16 +116,28 @@ function App() {
   useEffect(() => {
     if (searchTerm.trim()) return; // no rotar si el usuario está buscando
     let cancelled = false;
+    let requestCount = 0;
+    const MAX_REQUESTS_PER_MINUTE = 30; // Límite conservador
 
     const tick = async () => {
       try {
+        // Rate limiting check
+        if (requestCount >= MAX_REQUESTS_PER_MINUTE) {
+          console.warn('Rate limit alcanzado, pausando rotación');
+          return;
+        }
+
         const getRandom = async () => {
+          if (requestCount >= MAX_REQUESTS_PER_MINUTE) return null;
+          requestCount++;
+          
           const id = Math.floor(Math.random() * 1010) + 1;
           const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
           if (!res.ok) return null;
           const data = await res.json();
           return new Pokemon(data);
         };
+        
         const [p1, p2] = await Promise.all([getRandom(), getRandom()]);
         const newcomers = [p1, p2].filter(Boolean);
         if (cancelled || newcomers.length === 0) return;
@@ -141,13 +165,24 @@ function App() {
           }
           return next;
         });
-      } catch {
-        // ignorar fallos puntuales
+      } catch (error) {
+        console.error('Error en rotación automática:', error);
+        // Reducir frecuencia si hay errores
+        requestCount = Math.max(0, requestCount - 1);
       }
     };
 
-    const interval = setInterval(tick, 8000);
-    return () => { cancelled = true; clearInterval(interval); };
+    // Reset counter every minute
+    const resetCounter = setInterval(() => {
+      requestCount = 0;
+    }, 60000);
+
+    const interval = setInterval(tick, 12000); // Aumentado a 12s
+    return () => { 
+      cancelled = true; 
+      clearInterval(interval);
+      clearInterval(resetCounter);
+    };
   }, [searchTerm]);
 
   return (

@@ -26,11 +26,20 @@ const PokemonCard = ({
   const sparkleTimeoutRef = useRef(null);
 
   useEffect(() => {
-    cryAudioRef.current = new Audio();
-    cryAudioRef.current.preload = 'none';
-    cryAudioRef.current.volume = 0.6;
+    // Crear audio de forma más segura
+    const audio = new Audio();
+    audio.preload = 'none';
+    audio.volume = 0.6;
+    cryAudioRef.current = audio;
+    
     return () => {
-      if (cryAudioRef.current) { cryAudioRef.current.pause(); cryAudioRef.current.src = ''; }
+      // Cleanup más exhaustivo
+      if (cryAudioRef.current) { 
+        cryAudioRef.current.pause(); 
+        cryAudioRef.current.removeAttribute('src');
+        cryAudioRef.current.load(); // Forzar cleanup completo
+        cryAudioRef.current = null;
+      }
       if (evoIntervalRef.current) { clearInterval(evoIntervalRef.current); }
       if (sparkleTimeoutRef.current) { clearTimeout(sparkleTimeoutRef.current); }
     };
