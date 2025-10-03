@@ -4,6 +4,7 @@ import SearchBar from './components/SearchBar';
 import PokemonGrid from './components/PokemonGrid';
 import { Pokemon } from './models/Pokemon.js';
 import PackOpener from './components/PackOpener.jsx';
+import PokeballIcon from './components/PokeballIcon.jsx';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -192,7 +193,11 @@ function App() {
       <div className="pokemon-silhouettes" aria-hidden="true" />
 
       <header className="app-header">
-        <h1 className="app-title">Cartas Doradas Pokémon</h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', justifyContent: 'center' }}>
+          <PokeballIcon width="40" height="40" style={{ filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.7))' }} />
+          <h1 className="app-title">Cartas Doradas Pokémon</h1>
+          <PokeballIcon width="40" height="40" style={{ filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.7))' }} />
+        </div>
         <p className="app-subtitle">Descubre y colecciona cartas doradas de Pokémon</p>
       </header>
       
